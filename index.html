@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tetris</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ══ HEADER ═══════════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="game-title">
+        <span class="title-tetris">Tetris</span>
+        <span class="title-edition">Pastel Edition</span>
+      </h1>
+    </div>
+  </header>
+
+  <!-- ══ JUEGO ═════════════════════════════════════════════ -->
+  <main class="site-main">
+    <div class="game-layout">
+
+      <!-- Panel izquierdo: hold + stats + controles -->
+      <aside class="left-panel">
+
+        <div class="panel-card">
+          <div class="panel-label">HOLD <span class="key-hint">C / Shift</span></div>
+          <canvas id="hold-canvas"></canvas>
+        </div>
+
+        <div class="panel-card stat-card score-card">
+          <div class="stat-label">SCORE</div>
+          <div class="stat-value" id="score-value">0</div>
+          <div class="stat-hs-row">
+            <span class="stat-hs-label">RÉCORD</span>
+            <span class="stat-hs-value" id="high-score-value">0</span>
+          </div>
+        </div>
+
+        <div class="panel-row">
+          <div class="panel-card stat-card half">
+            <div class="stat-label">NIVEL</div>
+            <div class="stat-value" id="level-value">1</div>
+          </div>
+          <div class="panel-card stat-card half">
+            <div class="stat-label">LÍNEAS</div>
+            <div class="stat-value" id="lines-value">0</div>
+          </div>
+        </div>
+
+        <!-- Combo: visible solo cuando hay racha (clase .active) -->
+        <div class="panel-card combo-card" id="combo-display">
+          <div class="combo-label">COMBO</div>
+          <div class="combo-value" id="combo-value">2</div>
+          <div class="combo-sub">racha consecutiva</div>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" id="restart-btn">Reiniciar</button>
+          <button class="btn btn-secondary" id="pause-btn">Pausar</button>
+        </div>
+
+        <div class="controls-guide">
+          <div class="ctrl-row"><kbd>← →</kbd><span>mover</span></div>
+          <div class="ctrl-row"><kbd>↑</kbd><span>rotar</span></div>
+          <div class="ctrl-row"><kbd>↓</kbd><span>bajar</span></div>
+          <div class="ctrl-row"><kbd>Espacio</kbd><span>drop</span></div>
+          <div class="ctrl-row"><kbd>C</kbd><span>hold</span></div>
+          <div class="ctrl-row"><kbd>P</kbd><span>pausa</span></div>
+          <div class="ctrl-row"><kbd>R</kbd><span>reiniciar</span></div>
+        </div>
+
+      </aside>
+
+      <!-- Canvas principal -->
+      <div class="canvas-frame">
+        <canvas id="tetris-canvas"></canvas>
+      </div>
+
+      <!-- Panel derecho: cola next -->
+      <aside class="right-panel">
+        <div class="panel-card next-card">
+          <div class="panel-label">SIGUIENTE</div>
+          <canvas id="next-canvas"></canvas>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <p>Hecho por <strong>Daiana Soria Piola</strong></p>
+  </footer>
+
+  <!--
+    Orden de carga (dependencias primero):
+      pieces.js → PIECES, PIECE_KEYS, getPiece, getCurrentShape, rotatePiece
+      board.js  → COLS, ROWS, createBoard, lockPiece, clearLines, calcScore, calcComboBonus
+      utils.js  → checkCollision, drawFromBag, resetBag, getDropInterval
+      render.js → CELL, PREVIEW_CELL, PREVIEW_SLOT, funciones render*
+      game.js   → orquesta todo
+  -->
+  <script src="js/pieces.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/game.js"></script>
+
+</body>
+</html>
